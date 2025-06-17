@@ -34,7 +34,7 @@ void show(struct myArray *a)
     
 }
 
-int main()
+int main()//Added a function
 {
     struct myArray marks;
     createArray(&marks,20,2);
