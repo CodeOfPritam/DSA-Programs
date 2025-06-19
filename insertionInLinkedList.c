@@ -44,7 +44,7 @@ int main(){
     printf("Linked List before insertion:\n");
     linkedListTraversal(head);
     insertAtFirst(head,56);
-    printf("Linked List after insertion\n");
+    printf("Linked List after insertion:\n");
     linkedListTraversal(head);
 
     return 0;
