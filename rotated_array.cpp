@@ -9,9 +9,11 @@ int main()
     while (st <= end)
     {
         mid = st + (end - st) / 2;
-        if (nums[mid] == tar){
-            cout<<"Target is found at position "<<mid<<endl;
-            break;}
+        if (nums[mid] == tar)
+        {
+            cout << "Target is found at position " << mid << endl;
+            break;
+        }
         if (nums[st] <= nums[mid]) // Left Sorted
         {
             if (nums[st] <= tar && tar <= nums[mid])
@@ -21,7 +23,7 @@ int main()
         }
         else
         {
-            if (nums[mid] <= tar && tar <= nums[end])
+            if (nums[mid] <= tar && tar <= nums[end]) // Right Sorted
                 st = mid + 1;
             else
                 end = mid - 1;
