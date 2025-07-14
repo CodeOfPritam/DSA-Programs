@@ -7,7 +7,7 @@ int main()
     int temp=0;
     for(int i=0;i<6-1;i++)
     {
-        for(int j=i+1;j<6-1-i;j++)
+        for(int j=0;j<6-1-i;j++)
         {
             if(arr[j]>arr[j+1])
             {
@@ -17,7 +17,8 @@ int main()
     }
     for(int i=0;i<6;i++)
     {
-        printf("%d\n",arr[i]);
+       cout<<arr[i]<<" ";
     }
+    cout<<endl;
     return 0;
 }
