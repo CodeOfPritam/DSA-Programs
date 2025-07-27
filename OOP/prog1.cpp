@@ -9,6 +9,7 @@ class Teacher
 
 private: // private property
     int salary;
+    int tax;
 
 public: // public property
     string name, dept, subject;
@@ -30,6 +31,12 @@ public: // public property
     {
         return salary;
     }
+
+    double showTax()
+    {
+        tax=0.05*salary;
+        return tax;
+    }
 };
 
 int main()
@@ -43,6 +50,7 @@ int main()
     cout << "Teacher's department: " << t1.dept << endl;
     cout << "Teacher's subject: " << t1.subject << endl;
     cout << "Teacher's salary: " << t1.getSalary() << endl;
+    cout << "Tax incurred on the teacher's salary: " << t1.showTax() << endl;
 
     return 0;
 }
