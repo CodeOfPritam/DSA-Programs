@@ -3,64 +3,77 @@ using namespace std;
 
 class Node
 {
-    public:
-        int data;
-        Node *next;
+public: 
 
-        Node(int val)
-        {
-            data=val;
-            next=NULL;
-        }
+    int data;
+    Node *next;
+
+    Node(int val)
+    {
+        data=val;
+        next=NULL;
+    }
 };
 
 class List
 {
+
     Node *head;
     Node *tail;
 
+public:
 
-    public:
-        List()
-        {
-            head=tail=NULL;
-        }
+    List()
+    {
+        head=tail=NULL;
+    }
 
-        void push_front(int val)
+    void push_front(int val)
+    {
+        Node *newNode=new Node(val);
+        if(head==NULL)
         {
-            Node* newNode=new Node(val); // dynamic object for permanent memory allocation
-            // Node newNode(val); // static object for temporary allocation
-            if(head==NULL)
-            {
-                head=tail=newNode;
-                return;
-            }
-            else
-            {
-                newNode->next=head; // (*a).val ==> a->val
-            }
+            head=tail=newNode;
         }
+        else
+        {
+            newNode->next=head;
+            head=newNode;
+        }
+    }
 
-        void print_Linkedlist()
+    void push_back(int val)
+    {
+        Node *newNode=new Node(val);
+        if(head==NULL)
         {
-            Node *temp=head;
-            while(temp!=NULL)
-            {
-                cout<<temp->data<<"->";
-                temp=temp->next;
-            }
-            cout<<"NULL"<<endl;
+            head=tail=newNode;
         }
+        else
+        {
+            tail=newNode;
+            newNode->next=NULL;
+        }
+    }
+
+    void print_List()
+    {
+        Node *temp;
+        while(temp!=NULL)
+        {
+            cout<<temp->data<<"-->";
+            temp=temp->next;
+        }
+        cout<<"NULL";
+    }
 };
 
 int main()
 {
     List l1;
-    l1.push_front(10);
-    l1.push_front(20);
-    l1.push_front(30);
-    l1.push_front(40);
-    l1.print_Linkedlist();
-
+    l1.push_front(1);
+    l1.push_front(2);
+    l1.push_front(3);
+    l1.print_List();
     return 0;
 }
