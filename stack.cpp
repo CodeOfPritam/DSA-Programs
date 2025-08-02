@@ -1,30 +1,46 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 class Stack
 {
-    vector<int> v;
+    int stack[100];  // Fixed size stack
+    int top=-1;
 
 public:
+
     void push(int val)
     {
-        v.push_back(val);
+        if (top >= 100-1)
+        {
+            cout << "Stack Overflow!" << endl;
+            return;
+        }
+        stack[++top] = val;
     }
 
-    void pop()
+    int pop()
     {
-        v.pop_back();
+        if (top < 0)
+        {
+            cout << "Stack Underflow!" << endl;
+            return -1;
+        }
+        return stack[top--];
     }
 
-    int top()
+    int peak()
     {
-        return v[v.size() - 1];
+        if (top < 0)
+        {
+            cout << "Stack is empty!" << endl;
+            return -1;
+        }
+        return stack[top];
     }
 
-    bool empty()
+    bool isEmpty()
     {
-        return v.size() == 0;
+        return top < 0;
     }
 };
 
@@ -34,10 +50,9 @@ int main()
     s.push(10);
     s.push(20);
     s.push(30);
-    s.pop();
-    while (!s.empty())
+    while (!s.isEmpty())
     {
-        cout << s.top() << endl;
+        cout << s.peak() << " ";
         s.pop();
     }
     cout << endl;

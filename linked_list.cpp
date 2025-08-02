@@ -56,6 +56,25 @@ public:
         }
     }
 
+    void pop_front()
+    {
+        if (head == NULL)
+        {
+            cout << "List is empty" << endl;
+            return;
+        }
+        Node *temp = head;
+        head = head->next;
+        temp->next = NULL;
+
+        delete temp;
+
+        if (head == NULL)
+        {
+            tail = NULL; // also update tail if list becomes empty
+        }
+    }
+
     void print_List()
     {
         Node *temp;
@@ -74,6 +93,7 @@ int main()
     l1.push_front(1);
     l1.push_front(2);
     l1.push_front(3);
+    l1.pop_front();
     l1.print_List();
     return 0;
 }
