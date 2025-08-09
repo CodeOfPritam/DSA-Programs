@@ -10,7 +10,7 @@ bool isSorted(vector<int> &arr, int n)
     }
     else
     {
-        return arr[n - 1] > -arr[n - 1] && isSorted(arr, n - 1);
+        return arr[n - 1] >= arr[n - 2] && isSorted(arr, n - 1);
     }
 }
 
