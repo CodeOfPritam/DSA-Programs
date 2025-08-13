@@ -30,6 +30,11 @@ int pop(int st[])
 
 void display(int st[])
 {
+    if(top==-1)
+    {
+        printf("Stack underflow\n");
+        return;
+    }
     for (int idx = 0; idx <= top; idx++)
     {
         printf("%d\t", st[idx]);
