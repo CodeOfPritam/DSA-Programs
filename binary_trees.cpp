@@ -68,7 +68,8 @@ void postOrder(Node *root)
 
 void levelOrder(Node *root)
 {
-    if (root == NULL) return;
+    if (root == NULL)
+        return;
 
     queue<Node *> Q;
     Q.push(root);
@@ -102,10 +103,45 @@ void levelOrder(Node *root)
     }
 }
 
+int height(Node *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+
+    int leftHt = height(root->left);
+    int rightHt = height(root->right);
+    return max(leftHt, rightHt) + 1;
+}
+
+int countNodes(Node *root)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+
+    int leftCount = countNodes(root->left);
+    int rightCount = countNodes(root->right);
+    return leftCount + rightCount + 1;
+}
+
+int sumOfNodes(Node* root)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+
+    int leftSum=sumOfNodes(root->left);
+    int rightSum=sumOfNodes(root->right);
+    return leftSum+rightSum+root->data;
+}
 int main()
 {
     vector<int> arr = {1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1};
-    idx = -1; // reset before building
+
     Node *root = buildTree(arr);
 
     cout << "Pre order traversal of the BST is :" << endl;
@@ -122,5 +158,12 @@ int main()
 
     cout << "Level order traversal of the BST is :" << endl;
     levelOrder(root);
+
+    cout << "Height of the tree is : " << height(root) << endl;
+
+    cout<<"Number of nodes in the tree is : "<<countNodes(root)<<endl;
+
+    cout<<"Sum of all modes of the tree is : "<<sumOfNodes(root)<<endl;
+    
     return 0;
 }
