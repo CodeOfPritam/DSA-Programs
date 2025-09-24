@@ -15,7 +15,7 @@ bool isValid(vector<vector<int>> &grid, int r, int c, int n, int expVal)
     }
 
     //8 possible moves
-    int ans1 = isValid(grid, r - 1, c + 1, n, expVal + 1);
+    int ans1 = isValid(grid, r - 2, c + 1, n, expVal + 1);
     int ans2 = isValid(grid, r - 1, c + 2, n, expVal + 1);
     int ans3 = isValid(grid, r + 1, c + 2, n, expVal + 1);
     int ans4 = isValid(grid, r + 2, c + 1, n, expVal + 1);
