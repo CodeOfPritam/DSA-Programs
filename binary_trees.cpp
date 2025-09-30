@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <map>
 using namespace std;
 
 class Node
@@ -117,7 +118,7 @@ int height(Node *root)
 
 int countNodes(Node *root)
 {
-    if(root==NULL)
+    if (root == NULL)
     {
         return 0;
     }
@@ -127,17 +128,55 @@ int countNodes(Node *root)
     return leftCount + rightCount + 1;
 }
 
-int sumOfNodes(Node* root)
+int sumOfNodes(Node *root)
 {
-    if(root==NULL)
+    if (root == NULL)
     {
         return 0;
     }
 
-    int leftSum=sumOfNodes(root->left);
-    int rightSum=sumOfNodes(root->right);
-    return leftSum+rightSum+root->data;
+    int leftSum = sumOfNodes(root->left);
+    int rightSum = sumOfNodes(root->right);
+    return leftSum + rightSum + root->data;
 }
+
+// Top view of a Binary Tree
+void topView(Node *root)
+{
+    if (root == NULL) return;
+
+    queue<pair<Node*, int>> q; // (node, HD)
+    map<int, int> m;           // <HD, node val>
+
+    q.push({root, 0});
+
+    while (!q.empty())
+    {
+        Node* curr = q.front().first;
+        int currHD = q.front().second;
+        q.pop();
+
+        if (m.find(currHD) == m.end()) {
+            m[currHD] = curr->data;
+        }
+
+        if (curr->left != NULL) {
+            q.push({curr->left, currHD - 1});
+        }
+
+        if (curr->right != NULL) {
+            q.push({curr->right, currHD + 1});
+        }
+    }
+
+    cout<<"Top view of the binary tree is :"<<endl;
+    
+    for (auto it : m) {
+        cout << it.second << " ";
+    }
+    cout << endl;
+}
+
 int main()
 {
     vector<int> arr = {1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1};
@@ -161,9 +200,11 @@ int main()
 
     cout << "Height of the tree is : " << height(root) << endl;
 
-    cout<<"Number of nodes in the tree is : "<<countNodes(root)<<endl;
+    cout << "Number of nodes in the tree is : " << countNodes(root) << endl;
 
-    cout<<"Sum of all modes of the tree is : "<<sumOfNodes(root)<<endl;
-    
+    cout << "Sum of all modes of the tree is : " << sumOfNodes(root) << endl;
+
+    topView(root);
+
     return 0;
 }
