@@ -143,38 +143,58 @@ int sumOfNodes(Node *root)
 // Top view of a Binary Tree
 void topView(Node *root)
 {
-    if (root == NULL) return;
+    if (root == NULL)
+        return;
 
-    queue<pair<Node*, int>> q; // (node, HD)
-    map<int, int> m;           // <HD, node val>
+    queue<pair<Node *, int>> q; // (node, HD)
+    map<int, int> m;            // <HD, node val>
 
     q.push({root, 0});
 
     while (!q.empty())
     {
-        Node* curr = q.front().first;
+        Node *curr = q.front().first;
         int currHD = q.front().second;
         q.pop();
 
-        if (m.find(currHD) == m.end()) {
+        if (m.find(currHD) == m.end())
+        {
             m[currHD] = curr->data;
         }
 
-        if (curr->left != NULL) {
+        if (curr->left != NULL)
+        {
             q.push({curr->left, currHD - 1});
         }
 
-        if (curr->right != NULL) {
+        if (curr->right != NULL)
+        {
             q.push({curr->right, currHD + 1});
         }
     }
 
-    cout<<"Top view of the binary tree is :"<<endl;
-    
-    for (auto it : m) {
+    cout << "Top view of the binary tree is :" << endl;
+
+    for (auto it : m)
+    {
         cout << it.second << " ";
     }
     cout << endl;
+}
+
+// Transform to Sum Tree
+int sumTree(Node *root)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+
+    int leftSum = sumTree(root->left);
+    int rightSum = sumTree(root->right);
+    root->data += leftSum + rightSum;
+
+    return root->data;
 }
 
 int main()
@@ -205,6 +225,10 @@ int main()
     cout << "Sum of all modes of the tree is : " << sumOfNodes(root) << endl;
 
     topView(root);
+
+    cout<<"After conversion :"<<endl;
+    sumTree(root);
+    preOrder(root);
 
     return 0;
 }
