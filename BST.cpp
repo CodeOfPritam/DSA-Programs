@@ -46,6 +46,28 @@ void inorder(Node* root)
     inorder(root->right);
 }
 
+bool searchBST(Node* root, int key)
+{
+    if(root==NULL)
+    {
+        return false;
+    }
+
+    if(root->data==key)
+    {
+        return true;
+    }
+
+    if(key<root->data)
+    {
+        return searchBST(root->left, key);
+    }
+    else
+    {
+        return searchBST(root->right, key);
+    }
+}
+
 int main()
 {
     vector<int> arr = {3, 2, 1, 5, 6, 4};
@@ -54,5 +76,6 @@ int main()
     inorder(root);
     cout << endl;
 
+    cout<<"Element found: "<<searchBST(root, 5)<<endl;
     return 0;
 }
