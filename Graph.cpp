@@ -3,19 +3,19 @@
 #include<list>
 using namespace std;
 
-class Graph{
+class Graph
+{
     int V;
-    list<int> *l; //int *arr
+    list<int> *l;
 
 public:
     Graph(int V)
     {
         this->V=V;
-        //arr=new int[V]
-        l=new list<int>[V];
-    } 
-    
-    void addEdge(int u, int v)
+        l=new list<int> [V];
+    }
+
+    void addNewEdges(int u, int v)
     {
         l[u].push_back(v);
         l[v].push_back(u);
@@ -25,8 +25,8 @@ public:
     {
         for(int i=0;i<V;i++)
         {
-            cout<<i<<" : ";
-            for(int neigh : l[i]) //[0, 2, 3]
+            cout<<i<<"->";
+            for(int neigh : l[i])
             {
                 cout<<neigh<<" ";
             }
@@ -37,13 +37,12 @@ public:
 
 int main()
 {
-    Graph g(5); 
-
-    g.addEdge(0, 1);
-    g.addEdge(1, 2);
-    g.addEdge(1, 3);
-    g.addEdge(2, 3);
-    g.addEdge(2, 4);
+    Graph g(5);
+    g.addNewEdges(0,1);
+    g.addNewEdges(1,3);
+    g.addNewEdges(1,2);
+    g.addNewEdges(2,3);
+    g.addNewEdges(2,4);
 
     g.printAdjList();
 
