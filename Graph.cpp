@@ -35,39 +35,31 @@ public:
         }
     }
 
-    // BFS for Disconnected Graph
-    void bfs()
+    // BFS Traversal
+    void bfs() // O(v+u)
     {
-        vector<bool> vis(V, false);
         queue<int> Q;
+        vector<bool> vis(V, false);
 
-        cout << "BFS Traversal of the graph is:" << endl;
+        Q.push(0);
+        vis[0] = true;
 
-        for (int start = 0; start < V; start++)
+        while (Q.size() > 0)
         {
-            if (!vis[start])
+            int u = Q.front();
+            Q.pop();
+
+            cout << u << " ";
+
+            for (int v : l[u])
             {
-                Q.push(start);
-                vis[start] = true;
-
-                while (!Q.empty())
+                if (!vis[v])
                 {
-                    int u = Q.front();
-                    Q.pop();
-                    cout << u << " ";
-
-                    for (int v : l[u])
-                    {
-                        if (!vis[v])
-                        {
-                            vis[v] = true;
-                            Q.push(v);
-                        }
-                    }
+                    vis[v] = true;
+                    Q.push(v);
                 }
             }
         }
-
         cout << endl;
     }
 
@@ -101,20 +93,46 @@ public:
 
         cout << endl;
     }
+
+    //DFS Traversal
+    void dfsHelper(int u, vector<bool> &vis)
+    {
+        cout<<u<<" ";
+        vis[u]=true;
+
+        for(int v:l[u])
+        {
+            if(!vis[v])
+            {
+                dfs(v, vis);
+            }
+        }
+        cout<<endl;
+    }
+
+    void dfs()
+    {
+        int src=0;
+        vector<bool> vis(V, false);
+
+        dfsHelper(src, vis);
+    }
 };
 
 int main()
 {
-    Graph g(7);
+    Graph g(5);
     g.addNewEdges(0, 1);
-    g.addNewEdges(0, 2);
+    g.addNewEdges(1, 2);
     g.addNewEdges(1, 3);
-    g.addNewEdges(4, 5);
-    g.addNewEdges(5, 6);
+    g.addNewEdges(2, 4);
 
     g.printAdjList();
 
+    cout<<"BFS Traversal of the graph is:"<<endl;
     g.bfs();
+
+    cout<<"DFS Traversal of the graph is:"<<endl;
     g.dfs();
 
     return 0;
