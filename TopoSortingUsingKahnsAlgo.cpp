@@ -4,62 +4,69 @@
 #include <queue>
 using namespace std;
 
-class Graph {
+class Graph
+{
     int V;
     list<int> *l;
 
 public:
-    Graph(int V) {
+    Graph(int V)
+    {
         this->V = V;
         l = new list<int>[V];
     }
 
-    void addEdge(int u, int v) {
-        l[u].push_back(v);  // directed edge
+    void addEdge(int u, int v)
+    {
+        l[u].push_back(v); // directed edge
     }
 
-    void topoSort() {
-        vector<int> indeg(V, 0);
+    void topoSort()
+    {
+        // find indegree for each node
+        vector<int> indeg(V, 0);   // FIXED
 
-        // calculate indegree
-        for (int u = 0; u < V; u++) {
-            for (int v : l[u]) {
+        for (int u = 0; u < V; u++)
+        {
+            for (int v : l[u])
+            {
                 indeg[v]++;
             }
         }
 
-        queue<int> q;
-
-        // push nodes with indegree 0
-        for (int i = 0; i < V; i++) {
-            if (indeg[i] == 0) {
-                q.push(i);
-            }
+        queue<int> Q;
+        for (int i = 0; i < V; i++)
+        {
+            if (indeg[i] == 0)
+                Q.push(i);
         }
 
-        vector<int> res;
+        vector<int> res;   
 
-        while (!q.empty()) {
-            int node = q.front();
-            q.pop();
-            res.push_back(node);
+        while (!Q.empty())
+        {
+            int curr = Q.front();
+            Q.pop();
+            res.push_back(curr);
 
-            for (int nbr : l[node]) {
-                indeg[nbr]--;
-                if (indeg[nbr] == 0) {
-                    q.push(nbr);
+            for (int v : l[curr])
+            {
+                indeg[v]--;
+                if (indeg[v] == 0)
+                {
+                    Q.push(v);
                 }
             }
         }
 
-        // print result
-        for (int x : res) 
-            cout << x << " ";
+        for (int val : res)
+            cout << val << " ";
         cout << endl;
     }
 };
 
-int main() {
+int main()
+{
     Graph g(6);
 
     g.addEdge(5, 0);
