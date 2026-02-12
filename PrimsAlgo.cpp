@@ -1,33 +1,35 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int primMST(int V, vector<vector<pair<int, int>>> adj)
+int primMST(int V, vector<vector<pair<int, int>>> &adj)
 {
     vector<bool> inMST(V, false);
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-    int minCost = 0;
+    int minCost=0;
 
-    pq.push({0,0}); // {weight, vertex}
+    pq.push({0,0});
 
     while(!pq.empty())
     {
-        auto p = pq.top();
-        int wt = p.first;
-        int u = p.second;
+        auto p=pq.top();
+        int wt=p.first;
+        int u=p.second;
         pq.pop();
 
         if(!inMST[u])
         {
-            inMST[u] = true;
-            minCost += wt;
+            inMST[u]=true;
+            minCost+=wt;
 
-            for(int i = 0; i < adj[u].size(); i++)
+            for(int i=0;i<adj[u].size();i++)
             {
-                int v = adj[u][i].first;
-                int wt = adj[u][i].second;
+                int v=adj[u][i].first;
+                int wt=adj[u][i].second;
 
-                if(!inMST[v]) //optimization
-                    pq.push({wt, v});
+                if(!inMST[v])
+                {
+                    pq.push({wt,v});
+                }
             }
         }
     }
